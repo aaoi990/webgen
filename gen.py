@@ -1,33 +1,3 @@
-#!/usr/bin/env python3
-"""
-manifest_gen.py - generate website design manifests, one JSON object per line.
-
-A manifest is the full visual/structural spec for ONE site (layout, typography,
-colour palette, components, motion, asset delivery). No HTML is produced here;
-you feed a manifest + domain + theme to an LLM later, and that is your only
-token cost.
-
-Design goals
-  * every site looks different, but every combination is "coherent": a design
-    archetype is picked first and it constrains every other choice so you never
-    get a luxury serif brand with neon pill buttons and wavy dividers.
-  * no images, no external fonts, no CDNs - system font stacks and CSS/SVG-only
-    visuals.
-  * palettes are generated in HSL and pushed until they pass WCAG AA contrast.
-  * CSS/JS delivery (inline vs external files, file names, class prefixes,
-    naming scheme) is randomised so sites are not copy-paste clones.
-  * fully reproducible: --seed reproduces a whole run, and every manifest
-    carries its own `seed` so one site can be regenerated with --from-seed.
-
-Usage
-  python3 manifest_gen.py 100
-  python3 manifest_gen.py --count 100000 --out manifests.jsonl --seed 7
-  python3 manifest_gen.py 3 --sample                  # pretty-print first one
-  python3 manifest_gen.py --glossary glossary.md      # id glossary for your system prompt
-  python3 manifest_gen.py --from-seed 123456789       # regenerate one manifest
-
-Stdlib only. Python 3.8+.
-"""
 import argparse
 import colorsys
 import hashlib
